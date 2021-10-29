@@ -1,4 +1,15 @@
-Distributed instructions:
+iscoolguy#3341 https://www.youtube.com/channel/UCAskB2OCC944KGgQ9fr64EA
+This is a brute force tool that is used to brute force most websites
+
+Requirements
+pip2 install selenium
+pip2 install requests
+Chromium and chromedriver are required
+
+You can download chromedriver here: http://chromedriver.chromium.org/downloads for this fork or through https://mega.nz/file/iNlmhBIC#qc1ltLAYYE1h3jjYA3fp6dShLuGeDQmHuOzdc5bj544, create a folder in your C drive called 'webdrivers' and place the executable file inside. 
+
+
+Installation instructions:
 Step1, copy Python27 folder to > This PC > Local Disk (C:)
 Step2, copy chromedriver_win32.zip to > This PC > Local Disk (C:) #do not extract
 Step3, open terminal and type in manually: "cd /Python27", "pip2 install selenium", "pip2 install requests" #wait until fully installed, please.
