@@ -1,4 +1,9 @@
 from __future__ import print_function
+"""
+with open("C:/actualwordlist/wordlist1.txt","r") as file2:ul=file2.readlines()
+print(len(ul))
+
+"""
 import time
 import threading
 #452935 lines
@@ -24,72 +29,71 @@ with open("C:/1wordlisttoseperate.txt","r") as openagain:
         for k in pgsla: pof=pof+k
         alist.append(pof)
   skipper=al//8
-end,lineswrite=time.time(),(len(alist)//5000)+1
+end,lineswrite=time.time(),(len(alist)//50000)+1
 print(end-start)
 
-def opopop():
+def opopop(oldkak,kak):
   for i in range(oldkak,kak):
 	with open("C:/actualwordlist/wordlist"+str(i)+".txt","w") as file2:
 			for x in range(i*lineswrite,lineswrite*(i+2)):file2.write(alist[x]+"\n")
 
+oldkak,kak=1,5001
+t1=threading.Thread(target=opopop(oldkak,kak))
 
-oldkak,kak=1,501
-t1=threading.Thread(target=opopop)
+oldkak,kak=5001,10001
+t2=threading.Thread(target=opopop(oldkak,kak))
 
-oldkak,kak=501,1001
-t2=threading.Thread(target=opopop)
+oldkak,kak=10001,15001
+t3=threading.Thread(target=opopop(oldkak,kak))
 
-oldkak,kak=1001,1501
-t3=threading.Thread(target=opopop)
+oldkak,kak=15001,20001
+t4=threading.Thread(target=opopop(oldkak,kak))
 
-oldkak,kak=1501,2001
-t4=threading.Thread(target=opopop)
+oldkak,kak=20001,25001
+t5=threading.Thread(target=opopop(oldkak,kak))
 
-oldkak,kak=2001,2501
-t5=threading.Thread(target=opopop)
+oldkak,kak=25001,30001
+t6=threading.Thread(target=opopop(oldkak,kak))
 
-oldkak,kak=2501,3001
-t6=threading.Thread(target=opopop)
+oldkak,kak=30001,35001
+t7=threading.Thread(target=opopop(oldkak,kak))
 
-oldkak,kak=3001,3501
-t7=threading.Thread(target=opopop)
+oldkak,kak=35001,40001
+t8=threading.Thread(target=opopop(oldkak,kak))
 
-oldkak,kak=3501,4001
-t8=threading.Thread(target=opopop)
+oldkak,kak=40001,45001
+t9=threading.Thread(target=opopop(oldkak,kak))
 
-oldkak,kak=4001,4501
-t9=threading.Thread(target=opopop)
-
-oldkak,kak=4501,5001
-t10=threading.Thread(target=opopop)
+oldkak,kak=45001,50001
+t10=threading.Thread(target=opopop(oldkak,kak))
 
 
-oldkak,kak=1,501
+oldkak,kak=1,5001
 t1.start()
 
-oldkak,kak=501,1001
+oldkak,kak=5001,10001
 t2.start()
 
-oldkak,kak=1001,1501
+oldkak,kak=10001,15001
 t3.start()
 
-oldkak,kak=1501,2001
+oldkak,kak=15001,20001
 t4.start()
 
-oldkak,kak=2001,2501
+oldkak,kak=20001,25001
 t5.start()
 
-oldkak,kak=2501,3001
+oldkak,kak=25001,30001
 t6.start()
 
-oldkak,kak=3001,3501
+oldkak,kak=30001,35001
 t7.start()
 
-oldkak,kak=3501,4001
+oldkak,kak=35001,40001
 t8.start()
 
-oldkak,kak=4001,4501
+oldkak,kak=40001,45001
 t9.start()
 
-oldkak,kak=4501,5001
+oldkak,kak=45001,50001
 t10.start()
