@@ -13,6 +13,7 @@ You can download chromedriver here: http://chromedriver.chromium.org/downloads f
 
 # Links
 
+full combined list to use the "wordlistseperator.py" for making 50,000 wordlists: https://bit.ly/3IlMp0i
 python27 folder: (download as one file) https://mega.nz/folder/TN0SzRya#TV0EyI4lP0SSxoptPX3g1A
 
 chrome driver download: https://mega.nz/file/iNlmhBIC#qc1ltLAYYE1h3jjYA3fp6dShLuGeDQmHuOzdc5bj544
