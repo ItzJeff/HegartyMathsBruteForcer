@@ -1,3 +1,6 @@
+#This is currently outdated and needs a new install tutorial. If you'd like a faster 20thread bruter script non-obfuscated ask iscoolguy#3341. cba to upload rn
+
+
 # iscoolguy#3341
 channel: https://www.youtube.com/channel/UCAskB2OCC944KGgQ9fr64EA
 
